@@ -19,20 +19,6 @@ Simple full-stack AI chatbot helpdesk for smart-building support.
 - Admin dashboard with counts, assignment, and status updates
 
 
-Your current backend is configured for LocalDB by default:
-
-```json
-"DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=SmartBuildingHelpdeskDb;Trusted_Connection=True;TrustServerCertificate=True;"
-```
-
-If another laptop does not have LocalDB, change `backend/appsettings.json` to a SQL Server instance that exists on that machine.
-
-Example for SQL Server Express:
-
-```json
-"DefaultConnection": "Server=.\\SQLEXPRESS;Database=SmartBuildingHelpdeskDb;Trusted_Connection=True;TrustServerCertificate=True;"
-```
-
 ## OpenRouter Key
 
 Set the key in PowerShell before starting the backend:
@@ -91,24 +77,6 @@ Angular uses `frontend/proxy.conf.json`, so requests to `/api` are forwarded to 
 
 These accounts are created automatically on backend startup if they do not already exist.
 
-## Another Laptop Checklist
-
-1. Copy the whole `new_chatbot` folder.
-2. Install .NET 10 SDK.
-3. Install Node.js LTS.
-4. Make sure SQL Server or LocalDB exists.
-5. Update `backend/appsettings.json` if that laptop uses a different SQL Server instance.
-6. Set `OPENROUTER_API_KEY`.
-7. Run `dotnet run` in `backend/`.
-8. Run `npm install` and `npm start` in `frontend/`.
-
-## Config You May Need To Change
-
-- Database connection: `backend/appsettings.json`
-- Frontend allowed origin: `backend/appsettings.json`
-- Frontend proxy target: `frontend/proxy.conf.json`
-
-If you change backend port from `5182`, update `frontend/proxy.conf.json` too.
 
 ## Build Checks
 
