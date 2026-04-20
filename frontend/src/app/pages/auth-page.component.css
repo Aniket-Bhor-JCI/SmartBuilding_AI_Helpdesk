@@ -1,0 +1,96 @@
+.auth-page {
+  display: grid;
+  place-items: center;
+}
+
+.auth-layout {
+  width: min(1100px, 100%);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  overflow: hidden;
+}
+
+.brand-panel {
+  padding: 48px;
+  background: linear-gradient(160deg, #eef5ff 0%, #e7eefc 100%);
+}
+
+.brand-panel h1 {
+  margin: 18px 0 12px;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.05;
+}
+
+.feature-list {
+  display: grid;
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.feature-list div {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.feature-list p {
+  margin-bottom: 0;
+}
+
+.form-panel {
+  padding: 40px;
+}
+
+.mode-switch {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 6px;
+  background: #eef3f8;
+  border-radius: 16px;
+}
+
+.mode-switch .btn {
+  background: transparent;
+}
+
+.mode-switch .active {
+  background: white;
+  box-shadow: 0 8px 20px rgba(31, 84, 191, 0.12);
+}
+
+.form-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+label span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.submit-btn {
+  margin-top: 8px;
+}
+
+.demo-box {
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #f7faff;
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-panel,
+  .form-panel {
+    padding: 24px;
+  }
+}

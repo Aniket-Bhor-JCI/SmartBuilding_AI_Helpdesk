@@ -1,0 +1,100 @@
+<div class="page-shell dashboard-page">
+  <div class="dashboard-grid">
+    <section class="hero-strip">
+      <div>
+        <span class="pill">Smart Helpdesk Bot</span>
+        <h1>Welcome, {{ session()?.name }}</h1>
+        <p class="muted">Describe the issue in natural language. The bot will suggest a quick fix and ask before creating a ticket.</p>
+      </div>
+
+      <div class="hero-actions">
+        @if (session()?.role === 'Admin') {
+          <button class="btn btn-secondary" type="button" (click)="goToAdmin()">Open Admin Dashboard</button>
+        }
+        <button class="btn btn-secondary" type="button" (click)="logout()">Logout</button>
+      </div>
+    </section>
+
+    <section class="card chat-card">
+      <div class="chat-header">
+        <div>
+          <h2>Smart Helpdesk Bot</h2>
+          <p class="muted">Ask about WiFi, HVAC, plumbing, cleaning, or access issues.</p>
+        </div>
+      </div>
+
+      <div class="chat-thread">
+        @for (message of messages(); track $index) {
+          <div class="bubble-row" [class.user-row]="message.sender === 'user'">
+            <div class="bubble" [class.user-bubble]="message.sender === 'user'">
+              {{ message.text }}
+            </div>
+          </div>
+        }
+
+        @if (typing()) {
+          <div class="bubble-row">
+            <div class="bubble typing-bubble">Bot is typing...</div>
+          </div>
+        }
+      </div>
+
+      @if (pendingAnalysis()) {
+        <div class="ticket-confirmation">
+          <div>
+            <strong>Create ticket?</strong>
+            <p class="muted">{{ pendingAnalysis()?.issue }} • {{ pendingAnalysis()?.category }} • {{ pendingAnalysis()?.priority }}</p>
+            @if (pendingAnalysis()?.requiresHumanHandoff) {
+              <p class="muted">Human handoff recommended: {{ pendingAnalysis()?.handoffReason }}</p>
+            }
+          </div>
+          <div class="confirm-actions">
+            <button class="btn btn-primary" type="button" (click)="confirmTicketCreation(true)">Yes, create ticket</button>
+            <button class="btn btn-secondary" type="button" (click)="confirmTicketCreation(false)">No, thanks</button>
+          </div>
+        </div>
+      }
+
+      <div class="chat-input-row">
+        <input
+          class="input"
+          [ngModel]="draft()"
+          (ngModelChange)="draft.set($event)"
+          (keyup.enter)="sendMessage()"
+          placeholder="Example: WiFi not working on 5th floor"
+        />
+        <button class="btn btn-primary" type="button" (click)="sendMessage()" [disabled]="isSending()">Send</button>
+      </div>
+    </section>
+
+    <section class="card tickets-card">
+      <div class="section-header">
+        <h2>My Tickets</h2>
+        <span class="muted">{{ tickets().length }} total</span>
+      </div>
+
+      @if (hasTickets()) {
+        <div class="ticket-list">
+          @for (ticket of tickets(); track ticket.id) {
+            <article class="ticket-item">
+              <div class="ticket-topline">
+                <strong>{{ ticket.issue }}</strong>
+                <span class="pill small">{{ ticket.priority }}</span>
+              </div>
+              <div class="ticket-meta muted">
+                <span>{{ ticket.category }}</span>
+                <span>{{ ticket.location || 'No location' }}</span>
+                <span [class]="'status-' + ticket.status.toLowerCase().replace(' ', '-')">{{ ticket.status }}</span>
+              </div>
+              <small class="muted">{{ ticket.createdAt | date:'medium' }}</small>
+            </article>
+          }
+        </div>
+      } @else {
+        <div class="empty-state">
+          <p>No tickets yet. Use the chatbot to create one when needed.</p>
+        </div>
+      }
+    </section>
+  </div>
+</div>

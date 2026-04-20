@@ -1,0 +1,67 @@
+<div class="page-shell auth-page">
+  <div class="auth-layout card">
+    <section class="brand-panel">
+      <span class="pill">Smart Building Helpdesk</span>
+      <h1>AI support for building issues and service tickets.</h1>
+      <p class="muted">Users get instant suggestions first. Real issues can be turned into tickets in one click.</p>
+
+      <div class="feature-list">
+        <div>
+          <strong>Chat-first support</strong>
+          <p>Ask naturally. The bot classifies the issue and suggests a quick fix.</p>
+        </div>
+        <div>
+          <strong>Ticket creation</strong>
+          <p>If the issue needs action, the chatbot asks for confirmation and creates the ticket.</p>
+        </div>
+        <div>
+          <strong>Admin visibility</strong>
+          <p>Admins can assign tickets, update status, and track open work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-panel">
+      <div class="mode-switch">
+        <button type="button" class="btn" [class.active]="!isRegisterMode()" (click)="toggleMode(false)">Login</button>
+        <button type="button" class="btn" [class.active]="isRegisterMode()" (click)="toggleMode(true)">Register</button>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="form-grid">
+        @if (isRegisterMode()) {
+          <label>
+            <span>Name</span>
+            <input class="input" formControlName="name" placeholder="John Doe" />
+          </label>
+
+          <label>
+            <span>Role</span>
+            <select class="select" formControlName="role">
+              <option value="User">User</option>
+              <option value="Admin">Admin</option>
+            </select>
+          </label>
+        }
+
+        <label>
+          <span>Email</span>
+          <input class="input" formControlName="email" type="email" placeholder="you@company.com" />
+        </label>
+
+        <label>
+          <span>Password</span>
+          <input class="input" formControlName="password" type="password" placeholder="Enter password" />
+        </label>
+
+        <button class="btn btn-primary submit-btn" type="submit" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Please wait...' : (isRegisterMode() ? 'Create account' : 'Login') }}
+        </button>
+      </form>
+
+      <div class="demo-box">
+        <p><strong>Demo admin</strong>: admin&#64;smarthelpdesk.local / Admin123!</p>
+        <p><strong>Demo user</strong>: user&#64;smarthelpdesk.local / User123!</p>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+.admin-layout {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+}
+
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.admin-topbar h1 {
+  margin: 16px 0 8px;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.summary-card {
+  padding: 22px;
+}
+
+.summary-card strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 2.1rem;
+}
+
+.table-card {
+  padding: 18px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.compact {
+  min-width: 120px;
+  padding: 10px 12px;
+}
+
+.compact-btn {
+  padding: 10px 14px;
+}
+
+@media (max-width: 900px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-topbar {
+    flex-direction: column;
+  }
+}

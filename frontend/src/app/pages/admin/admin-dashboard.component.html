@@ -1,0 +1,80 @@
+<div class="page-shell admin-page">
+  <div class="admin-layout">
+    <section class="admin-topbar">
+      <div>
+        <span class="pill">Admin Dashboard</span>
+        <h1>Building support operations</h1>
+        <p class="muted">Track ticket status, assign work, and keep the queue moving.</p>
+      </div>
+      <button class="btn btn-secondary" type="button" (click)="logout()">Logout</button>
+    </section>
+
+    <section class="summary-grid">
+      <article class="card summary-card">
+        <span class="muted">Open</span>
+        <strong>{{ openCount() }}</strong>
+      </article>
+      <article class="card summary-card">
+        <span class="muted">In Progress</span>
+        <strong>{{ inProgressCount() }}</strong>
+      </article>
+      <article class="card summary-card">
+        <span class="muted">Resolved</span>
+        <strong>{{ resolvedCount() }}</strong>
+      </article>
+    </section>
+
+    <section class="card table-card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Issue</th>
+              <th>Category</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th>Assign</th>
+              <th>Created By</th>
+              <th>Created</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (ticket of tickets(); track ticket.id) {
+              <tr>
+                <td>#{{ ticket.id }}</td>
+                <td>{{ ticket.issue }}</td>
+                <td>{{ ticket.category }}</td>
+                <td>{{ ticket.location || '-' }}</td>
+                <td>
+                  <select class="select compact" [(ngModel)]="ticket.status">
+                    <option value="Open">Open</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="select compact" [(ngModel)]="ticket.priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                  </select>
+                </td>
+                <td>
+                  <input class="input compact" [(ngModel)]="ticket.assignedTo" placeholder="Assign to" />
+                </td>
+                <td>{{ ticket.createdByName || 'User #' + ticket.createdBy }}</td>
+                <td>{{ ticket.createdAt | date:'short' }}</td>
+                <td>
+                  <button class="btn btn-primary compact-btn" type="button" (click)="saveTicket(ticket)">Save</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>

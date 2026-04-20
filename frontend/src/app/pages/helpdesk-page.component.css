@@ -1,0 +1,148 @@
+.dashboard-grid {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+}
+
+.hero-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.hero-strip h1 {
+  margin: 16px 0 6px;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.chat-card,
+.tickets-card {
+  padding: 24px;
+}
+
+.chat-header,
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.chat-thread {
+  margin: 24px 0 18px;
+  padding: 10px;
+  min-height: 320px;
+  max-height: 420px;
+  overflow: auto;
+  background: #f8fbff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.bubble-row {
+  display: flex;
+  margin-bottom: 14px;
+}
+
+.user-row {
+  justify-content: flex-end;
+}
+
+.bubble {
+  max-width: min(75%, 540px);
+  padding: 14px 16px;
+  border-radius: 18px 18px 18px 6px;
+  background: #ecf1f7;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+.user-bubble {
+  border-radius: 18px 18px 6px 18px;
+  background: var(--primary);
+  color: white;
+}
+
+.typing-bubble {
+  color: var(--muted);
+}
+
+.ticket-confirmation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  border: 1px solid #d8e3fb;
+  border-radius: 18px;
+  background: #eff5ff;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+.ticket-list {
+  display: grid;
+  gap: 14px;
+}
+
+.ticket-item {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fbfdff;
+}
+
+.ticket-topline,
+.ticket-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pill.small {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+.empty-state {
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .hero-strip,
+  .ticket-confirmation {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions,
+  .confirm-actions,
+  .chat-input-row {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .bubble {
+    max-width: 90%;
+  }
+}
